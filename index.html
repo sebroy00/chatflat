@@ -1,38 +1,19 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="https://cdn.smooch.io/smooch.min.js"></script>
-</head>
-<style>
-    // To recolor bubbles to orange
-    #sk-container #sk-wrapper .sk-msg {
-        background-color: #ff3333;
-    }
-    
-    #sk-container #sk-wrapper .sk-msg::after {
-        border-left-color: #ff3333;
-    }
-    
-    #asd{
-        color:red;
-    }
-</style>
-<body>
-    <div id="asd">asdsds</div>
-    <script>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Document</title>
+      <link rel="stylesheet" type="text/css" href="site.css">
+    </head>
+    <body>
+      <div id="chat-container"></div>
+      <script src="smooch.js"></script>
+      <script>
         Smooch.init({
-            appToken: '8k5tyjgurq8vid6usqe788u14',
-            givenName: 'Cool',
-            surname: 'Person',
-            email: 'their_email@whatever.com',
-            // Additional properties
+          appToken: '8k5tyjgurq8vid6usqe788u14',
+          embedded: true
         });
-        Smooch.open();
-        Smooch.sendMessage('hello');
-    </script>
-</body>
-
+        Smooch.render(document.getElementById('chat-container'));
+      </script>
+    </body>
+</html>

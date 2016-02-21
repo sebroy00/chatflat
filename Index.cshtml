@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var a = "string";
+}
+@model List<string>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://cdn.smooch.io/smooch.min.js"></script>
+<div>@ViewBag.Key</div>
+
+<script>
+    Smooch.init({
+        appToken: '9o6j9tiaoqsvt507vw4nk2har',
+        userId: 'seb',
+        givenName: 'Cool',
+        surname: 'Person',
+        email: 'their_email@whatever.com',
+        customText: {
+            headerText: 'Chat to find your flat!',
+            inputPlaceholder: 'Start your message here...',
+            sendButtonText: 'Send',
+            introText: 'This is where your search started.',
+        }
+    });
+    Smooch.on('message:sent', function (message) {
+        alert(message.text);
+    });
+    Smooch.on('message:received', function (message) {
+        alert(message.text);
+    });
+    Smooch.open();
+    //Smooch.sendMessage('hello');
+    var authorizationToken = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6IjU2YzkyYmVmOTMzYmNjMmEwMGU5MGVmYyJ9.eyJzY29wZSI6ImFwcCIsImlhdCI6MTQ1NjAzMjE3Mn0.KOzzMfQg2OyXC-gBJTeFtcn56TM6cNTkX3VfbVuwIY4';
+    $.ajax({
+        url: '@Html.Action("getMatch")',
+        type: 'GET',
+        success: function (data) {
+            alert("yes");
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Status: " + textStatus); alert("Error: " + errorThrown);
+        }
+    });
+    $.ajax({
+        url: 'https://api.smooch.io/v1/appusers/seb/conversation/messages',
+        contentType: 'application/json',
+        type: 'POST',
+        beforeSend: function (request) {
+            request.setRequestHeader('Authorization', authorizationToken);
+        },
+        data: JSON.stringify({ 'text': 'Just put some vinegar on it', 'role': 'appMaker' }),
+        success: function (data) {
+            alert("yes");
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Status: " + textStatus); alert("Error: " + errorThrown);
+        }
+    });
+</script>
